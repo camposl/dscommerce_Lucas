@@ -25,7 +25,7 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    /* OPLÇAO COMPLETA
+    /* METODO COMPLETO
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Optional<Product> result = repository.findById(id);
@@ -35,7 +35,7 @@ public class ProductService {
 
      */
 
-
+    //METODO RESUMIDO
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id){
         Product product = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Recurso não encontrado"));
@@ -44,8 +44,8 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
-        Page<Product> result = repository.findAll( pageable);
+    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+        Page<Product> result = repository.serachByName(name, pageable);
         return result.map(x -> new ProductDTO(x));
     }
 
